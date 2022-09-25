@@ -10,7 +10,6 @@ import {fileURLToPath} from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
 const logLevels = {
   fatal: 0,
   error: 1,
@@ -22,11 +21,17 @@ const logLevels = {
  
 const logger = createLogger({
   levels: logLevels,
+  format: format.combine(
+    format.timestamp(),
+    format.json()
+),
   transports: [
     new transports.Console(),
     new(transports.File)({filename: 'logF.log'})              
-              ],
+  ],
 });
+
+logger.info('App Started')
 let xenergyData;
 try {
   fetch('http://3.109.76.78:2222/xenergyData.json')    
@@ -35,11 +40,14 @@ try {
         xenergyData = text
         fs.writeFile('xenergyData.json', JSON.stringify(xenergyData), err => {
           if (err) {
+            logger.error(err)
             throw err
           }
-          logger.debug('File is written successfully.')
+          logger.info('new data fetched.')
         })
         
+      }).catch( error => {
+          logger.error(error)
       })  
 } catch (error) {
   logger.error(error)
@@ -69,6 +77,7 @@ app.get("/iot", (request, response) => {
 
 // listen for requests :)
 const listener = app.listen("8000", () => {
+  logger.debug("Your app is listening on port " + listener.address().port)
   console.log("Your app is listening on port " + listener.address().port);
 });
 
@@ -79,3 +88,9 @@ const peerServer = ExpressPeerServer(listener, {
 });
 
 app.use('/peerjs', peerServer);
+
+process.on('SIGINT', function() {
+  console.log("Caught interrupt signal");
+  logger.info("Server closing")
+  process.exit();
+});

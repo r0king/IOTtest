@@ -41,7 +41,7 @@ was received
     - [x] In case the battery goes below 20 %
     - [x] Battery starts discharging (the value of current becomes negative) 
     - [x] If the battery pack voltage shoots across 100 mV 
-- [ ] disconnect device
+- [x] disconnect device
 - [ ] upgrade to cloud database
 
 
