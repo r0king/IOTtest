@@ -10,6 +10,7 @@ const avgVolElm = document.getElementById("avgVol");
 const packVolElm = document.getElementById("packVol");
 const currentElm = document.getElementById("current");
 const batteryElm = document.getElementById("battery");
+
 function removeStack (){
   notificatoins.removeChild(notificatoins.firstChild)
 }
@@ -37,6 +38,11 @@ peer.on("error", (error) => {
   console.error(error);
 });
 
+function diconnectPeer (){
+  peer.destroy();
+  notificatoins.insertAdjacentHTML('afterbegin',`<div class="card shadow-md bg-primary text-primary-content"><div class="card-body"><h2 class="card-title">Peer Disconnected &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X</h2> <p>THe webRTC connection has been disabled</p></div></div>`)
+
+}
 // Initiate outgoing connection
 let connectToPeer = () => {
   let peerId = peerIdEl.value;
@@ -99,3 +105,4 @@ let connectToPeer = () => {
 
 window.connectToPeer = connectToPeer;
 window.removeStack = removeStack;
+window.diconnectPeer = diconnectPeer;
