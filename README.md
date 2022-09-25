@@ -38,10 +38,9 @@ save any errors to a log and restart incase of any fault.
 - [x] After parsing the data at the server, save this data along with the time when this data
 was received
 - [x] Create real time alerts for this IoT device and battery
-    - [x] in case the battery goes below 20 %
-    - [x] battery starts discharging (the value of current becomes negative) 
-    - [x] r the
-pack voltage shoots across 100 mV 
+    - [x] In case the battery goes below 20 %
+    - [x] Battery starts discharging (the value of current becomes negative) 
+    - [x] If the battery pack voltage shoots across 100 mV 
 - [ ] disconnect device
 - [ ] upgrade to cloud database
 
