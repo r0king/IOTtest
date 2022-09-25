@@ -35,8 +35,10 @@ peer.on('connection', (conn) => {
   });
   conn.on('open', async () => {    
     for(let i =0;i<body.records.length;i++){
-      await new Promise(r => setTimeout(() => r(), 500));
-      conn.send(body.records[i])
+      if (body.records[i] !== body.records[i+1] ) {
+        await new Promise(r => setTimeout(() => r(), 500));
+        conn.send(body.records[i])
+      }
     }
   });
 });

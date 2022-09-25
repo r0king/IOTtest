@@ -3,31 +3,106 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A cool thing made with Glitch">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A cool thing made with Glitch" />
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>App</title>
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css" />
 
     <!-- import libraries -->
     <script src="/lib/peerjs.js"></script>
-    
-    <!-- import the webpage's client-side javascript file -->
-    <script src="/main.js" type="module"></script>
   </head>
   <body>
-    <h3>IOT server</h3>
-    <input type="text" id="connect-to-peer" />
-    <button onclick="connectToPeer()">
-      Connect
-    </button>
-    
-    <div class="messages">
-      
+    <div class="mockup-window border bg-base-300">
+      <div class="flex px-4 py-3 bg-base-200">
+        <h3>IOT server</h3>
+      </div>
+      <div class="form-control px-4 py-3">
+        <div class="input-group">
+          <input
+            type="text"
+            placeholder="Search…"
+            id="connect-to-peer"
+            class="input input-bordered w-3/4"
+          />
+          <button onclick="connectToPeer()" class="btn w-1/4 btn-square">
+            Connect &nbsp;
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="px-4 py-3 messages"></div>
+      <br />
+      <div class="grid h-1/2 place-items-center">
+        <div
+          class="stats flex flex-wrap ml-5 mb-5 stats-horizontal max-w-md lg:stats-horizontal shadow"
+        >
+          <div class="w-/3 stat place-items-center">
+            <div class="stat-title">IMEI</div>
+            <div class="stat-value" id="IMEI">NaN</div>
+          </div>
+          <div class="w-2/4 stat place-items-center">
+            <div class="stat-title">Latitude</div>
+            <div class="stat-value" id="latitude">0.0</div>
+          </div>
+          <div class="w-2/4 stat place-items-center">
+            <div class="stat-title">Longitude</div>
+            <div class="stat-value" id="longitude">0.0</div>
+          </div>
+          <div class="w-2/4 stat place-items-center">
+            <div class="stat-title">Average Voltage</div>
+            <div class="stat-value" id="avgVol">0.0</div>
+          </div>
+          <div class="w-2/4 stat place-items-center">
+            <div class="stat-title">Pack Voltage</div>
+            <div class="stat-value" id="packVol">0.0</div>
+          </div>
+
+          <div class="w-2/4 stat place-items-center">
+            <div class="stat-title">Current</div>
+            <div class="stat-value" id="current">0.0</div>
+          </div>
+
+          <div class="w-2/4 stat place-items-center">
+            <div class="stat-title">Battery</div>
+            <div class="stat-value" id="battery">200</div>
+          </div>
+        </div>
+      </div>
     </div>
+    <button
+      onclick="removeStack()"
+      class="stack absolute top-0 right-0"
+      id="notifications"
+    ></button>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/main.js" type="module"></script>
   </body>
 </html>

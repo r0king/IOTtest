@@ -1,14 +1,16 @@
-// server.js
-// where your node app starts
+// import {firebaseApp} from "./firebaseInit.js"
+import express from "express";
+import { ExpressPeerServer } from "peer";
+import fetch from 'node-fetch';
+import fs from 'fs'
+import { createLogger, format, transports } from "winston";
+import path from 'path';
+import {fileURLToPath} from 'url';
 
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
-const express = require("express");
-const { ExpressPeerServer } = require("peer");
-const fetch = require('node-fetch');
-const fs = require('fs')
-const { createLogger, format, transports } = require("winston");
- 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 const logLevels = {
   fatal: 0,
   error: 1,
@@ -25,7 +27,6 @@ const logger = createLogger({
     new(transports.File)({filename: 'logF.log'})              
               ],
 });
-logger.info("App starting"); 
 let xenergyData;
 try {
   fetch('http://3.109.76.78:2222/xenergyData.json')    
